@@ -12,9 +12,9 @@ const initialFilters = {
 
 export const useFilters = () => {
   
-    const {filters, setFilters} = useContext(FiltersContext);
+    const {state, dispatch} = useContext(FiltersContext);
 
-    const [state, dispatch] = useReducer(filtersReducer, initialFilters);
+    
 
     const setMinPrice = (value) => {
       dispatch({type: 'SET_MIN_PRICE', payload: value})
@@ -24,7 +24,7 @@ export const useFilters = () => {
       let dbCategory;
 
       switch (selectedCategory) {
-        case 'Placas de video':
+        case 'Placas de Video':
           dbCategory = 'VGA';
           break;
 
@@ -98,5 +98,5 @@ export const useFilters = () => {
           )
         })
       } 
-      return {prodFilter, setFilters, setMinPrice, setCategory, filters: state}
+      return {prodFilter, setMinPrice, setCategory, state}
     }

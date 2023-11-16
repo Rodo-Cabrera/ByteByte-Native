@@ -64,7 +64,7 @@ const ShopScreen = () => {
             <ShopHeader />        
         </View>
         <View>
-            <ProductList prodFilter={prodFilter} refreshing={filters}/>   
+            <ProductList refreshing={filters}/>   
         </View>
     </ScrollView>
   )

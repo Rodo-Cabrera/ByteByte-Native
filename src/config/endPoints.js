@@ -5,5 +5,6 @@ export const userEndpoints =
     };
 
 export const productsEndpoints = {
-    getAllProd: '/prod/get-products'
+    getAllProd: '/prod/get-products',
+    getProdByCategory : '/prod/get-category-product'
 }

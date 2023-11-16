@@ -29,3 +29,15 @@ export const getOneUser = async (token, id) => {
       console.log(error);
     }
   };
+
+  export const getProdByCategory = async (token, category) => {
+    try {
+      return await eShopApiUrl.get(`${productsEndpoints.getProdByCategory}/${category}`, {
+        headers: {
+          "access-token": token
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }

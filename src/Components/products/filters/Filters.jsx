@@ -10,35 +10,27 @@ const Filters = () => {
 
 
 
-    const {setFilters, filters, setCategory, setMinPrice} = useFilters()
+    const {setCategory, setMinPrice, state} = useFilters()
     const [priceRange, setPriceRange] = useState(0);
     const [cat, setCat] = useState('');
     const [handleCategory, setHandleCategory] = useState('')
 
     const handleSliderChange = (value) => {
         setPriceRange(value.toFixed(0))
-        // setFilters(prevState => ({
-        //     ...prevState,
-        //     minPrice: priceRange
-        // }))
         setMinPrice(Number(value.toFixed(0)))
     }
     const categories = ["Todas", "Placas de Video", "Memorias Ram", "Monitores", "Mouses", "Teclados", "Coolers", "Audio", "Sillones gamer", "Procesadores", "Gabinetes", "Fuentes", "Placas madre", "PC Completa"]
 
 
-    // const handleCatChange = () => {
-    //     setHandleCategory(
-    //         cat == "Placas de Video" ? 'VGA' :
-    //         cat == "Memorias Ram" ? 'RAM' :
-    //         cat == "Notebooks" ? 'notebook' :
-    //         cat == "Monitores" ? 'display' :
-    //         cat == "Todas" ? 'all' : 'all' 
-    //     )
-    // }
 
     const handleCatChange = (selectedItem) => {
-       setCat(selectedItem);
-       setCategory(selectedItem)
+        console.log('Selected Category:', selectedItem);
+        setCat(selectedItem);
+        const categoryToSet = selectedItem === 'Todas' ? 'all' : selectedItem
+        console.log('Category to set:', categoryToSet);
+        setCategory(categoryToSet, () => {
+            console.log('Category updated:', state);
+        })
     }
 
 

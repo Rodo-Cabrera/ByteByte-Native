@@ -3,9 +3,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { getAllProd, getProdByCategory } from '../../config/api';
-import { View } from 'react-native';
 import { FlatList } from 'react-native';
-import { Text } from 'react-native';
 import ProductCard from './ProductCard';
 import { useFilters } from '../../hooks/useFilters';
 
@@ -45,7 +43,7 @@ const ProductList = ({refreshing}) => {
     data={prodFilter(prod)}
     keyExtractor={(item) => item._id}
     renderItem={({item}) => (     
-      <ProductCard {...item} />
+      <ProductCard {...item} prod={item}/>
     )}
     contentContainerStyle={{paddingHorizontal: 15}}
     />

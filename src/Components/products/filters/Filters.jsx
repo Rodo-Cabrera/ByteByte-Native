@@ -12,8 +12,6 @@ const Filters = () => {
 
     const {setCategory, setMinPrice, state} = useFilters()
     const [priceRange, setPriceRange] = useState(0);
-    const [cat, setCat] = useState('');
-    const [handleCategory, setHandleCategory] = useState('')
 
     const handleSliderChange = (value) => {
         setPriceRange(value.toFixed(0))
@@ -24,8 +22,7 @@ const Filters = () => {
 
 
     const handleCatChange = (selectedItem) => {
-        console.log('Selected Category:', selectedItem);
-        setCat(selectedItem);
+        console.log('Selected Category:', selectedItem);  
         const categoryToSet = selectedItem === 'Todas' ? 'all' : selectedItem
         console.log('Category to set:', categoryToSet);
         setCategory(categoryToSet, () => {

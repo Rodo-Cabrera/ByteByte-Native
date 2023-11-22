@@ -1,13 +1,6 @@
 import { useContext } from "react"
 import { FiltersContext } from "../context/FiltersContext"
-import { filtersReducer } from "../reducers/filtersReducer"
-import { useReducer } from "react";
 
-
-const initialFilters = {
-  minPrice: 0,
-  category: 'all'
-};
 
 
 export const useFilters = () => {

@@ -5,18 +5,25 @@ import ProductList from './ProductList';
 import { ScrollView } from 'react-native-gesture-handler';
 import ShopHeader from './filters/ShopHeader';
 import { useFilters } from '../../hooks/useFilters';
+import Cart from './cart/Cart';
+import CartButton from './cart/CartButton';
+import { useCart } from '../../hooks/useCart';
 
 
 
 const ShopScreen = () => {
 
     const [refreshing, setRefreshing] = useState(false);
-    const {prodFilter, setFilters, filters} = useFilters()
+    const {filters} = useFilters();
+
+    const [cartButton, setCartButton] = useState(false);
+
+    const {cart} = useCart()
 
     const onRefresh = () => {
         setRefreshing(true);
 
-        //Agregar llamado a la API o a lo que se desee refrescar con scrollDown
+    
 
         setTimeout(() => {
             console.log('Refreshing xd');
@@ -45,8 +52,10 @@ const ShopScreen = () => {
 
 
   return (
+
+    <>
     <ScrollView>
-    <View>
+    {/* <View>
         <FlatList
         refreshControl={
             <RefreshControl 
@@ -59,7 +68,7 @@ const ShopScreen = () => {
         keyExtractor={item => item.id}
         horizontal={true}
         />
-    </View>
+    </View> */}
         <View>
             <ShopHeader />        
         </View>
@@ -67,6 +76,14 @@ const ShopScreen = () => {
             <ProductList refreshing={filters}/>   
         </View>
     </ScrollView>
+    {cart && Object.keys(cart).length > 0 ? (
+    <View>
+    <CartButton setCartButton={setCartButton}/>
+    </View>   
+    ) : <></>
+    }
+    <Cart cartButton={cartButton} setCartButton={setCartButton}/>
+    </>
   )
 }
 

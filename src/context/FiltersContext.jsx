@@ -1,14 +1,7 @@
 import { useReducer } from "react";
-import { useState } from "react";
 import { createContext } from "react";
 import { filtersReducer } from "../reducers/filtersReducer";
 import { useMemo } from "react";
-
-
-const SET_CATEGORY = 'SET_CATEGORY';
-const SET_MIN_PRICE = 'SET_MIN_PRICE';
-
-
 
 
 export const FiltersContext = createContext();

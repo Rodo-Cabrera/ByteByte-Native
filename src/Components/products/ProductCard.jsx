@@ -3,12 +3,35 @@ import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
 import {AntDesign} from '@expo/vector-icons'
 import { useState } from 'react'
 import { StyleSheet } from 'react-native'
+import { useCart } from '../../hooks/useCart';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
-const ProductCard = ({img, icon, category, tittle, price, description}) => {
 
+const ProductCard = ({img, icon, category, tittle, price, description, prod}) => {
 
     const [count, setCount] = useState(1);
+
+    const { addToCart, cart, clearCart, removeFromCart } = useCart();
+
+
+    
+    const handleAddToCart = () => {
+        const productToAdd = {
+            ...prod,
+            quantity: count
+        }
+        addToCart(productToAdd);
+    };
+    
+    const checkProdInCart = (product) => {
+        if (cart && Object.keys(cart).length > 0) {
+          return Object.values(cart).some(item => item._id === product._id);
+        }
+        return false;
+      };
+
+    const isProductInCart = checkProdInCart(prod);
 
   return (
     <View style={styles.container}>
@@ -33,12 +56,31 @@ const ProductCard = ({img, icon, category, tittle, price, description}) => {
         <Text numberOfLines={2} style={{fontSize: 12, textAlign: 'center'}}>
             {description}
         </Text>
-        <TouchableOpacity style={styles.cartButton}>
-            <View style={styles.cartContainer}>
-            <AntDesign name='shoppingcart' size={24} color={'white'}/>
-            <Text style={{color: 'white', textAlign: 'center', padding: 5}}>Agregar al Carrito</Text>
+            {isProductInCart ? 
+            <View  style={styles.cartButton}>
+            <TouchableOpacity  style={styles.cartContainer}  onPress={() => clearCart(prod)}>
+                    <MaterialCommunityIcons name="cart-off" size={24} color="red" />
+            </TouchableOpacity>
+            <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity style={styles.cartContainer}>
+                <MaterialCommunityIcons name="cart-plus" size={24} color="greenyellow" />
+            </TouchableOpacity>
+
+                    <Text> </Text>
+                
+            <TouchableOpacity style={styles.cartContainer} onPress={() => removeFromCart(prod)}>
+                   <MaterialCommunityIcons name="cart-minus" size={24}color="crimson" />
+            </TouchableOpacity>
             </View>
-        </TouchableOpacity>
+            </View>
+            :
+            <TouchableOpacity style={styles.cartButton} onPress={handleAddToCart}>
+                <View  style={[styles.cartContainer, {flexDirection: 'row'}]}>
+                    <AntDesign name='shoppingcart' size={24} color={'white'}/>
+                    <Text style={{color: 'white', textAlign: 'center', padding: 5}}>Agregar al Carrito</Text>
+                </View>
+            </TouchableOpacity>
+            }
         </View>
     </View>
   )
@@ -67,11 +109,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         borderRadius: 20,
         width: 300,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 5
     },
     cartContainer: {
         alignItems: 'center',
-        flexDirection: 'row',
         paddingHorizontal: 5,
         justifyContent: 'center'
     }

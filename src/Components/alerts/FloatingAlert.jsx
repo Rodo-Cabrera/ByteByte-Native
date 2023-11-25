@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
         height: 'auto',
         width: '95%',
         position: 'absolute',
-        bottom: 10,
+        top: 10,
         overflow: 'hidden',
         zIndex: 10,
         borderRadius: 40,

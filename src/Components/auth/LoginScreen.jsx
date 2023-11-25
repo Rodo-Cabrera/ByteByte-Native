@@ -41,13 +41,6 @@ const LoginScreen = ({navigation}) => {
     }
 
 
-    // const initFormValues = () => {
-    //     return{ 
-    //         email: '',
-    //         password: '',
-    //     }
-    // };
-
     const onChange = (e, type) => {
         setFormData({
             ...formData, 
@@ -73,7 +66,6 @@ const LoginScreen = ({navigation}) => {
             style={globalStyles.inputText}
             placeholder='Email'
             placeholderTextColor={'rgba(255,255,255, 0.3)'}
-            // onChange={(e) => onChange(e, 'email')}
             onChangeText={(value) => formik.setFieldValue('email', value)}
             name='email'
             />

@@ -56,7 +56,7 @@ const ProfileScreen = () => {
           <Text style={[styles.generalTxt, styles.name]}>{actualUser.name} {actualUser.lastName}</Text>
           <Text style={styles.generalTxt}>{actualUser.email}</Text>
           <Text style={styles.generalTxt}>{actualUser.disabled ? 'USUARIO DESABILITADO' : 'HABILITADO'}</Text>
-      <FloatingAlert type={type} title={title} action={action} />
+      <FloatingAlert type={type} title={title} action={action}/>
       </View>
       </>
   )

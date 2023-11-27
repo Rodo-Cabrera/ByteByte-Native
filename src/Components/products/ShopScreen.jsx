@@ -8,6 +8,7 @@ import { useFilters } from '../../hooks/useFilters';
 import Cart from './cart/Cart';
 import CartButton from './cart/CartButton';
 import { useCart } from '../../hooks/useCart';
+import ProductModal from './ProductModal';
 
 
 
@@ -17,6 +18,7 @@ const ShopScreen = () => {
     const {filters} = useFilters();
 
     const [cartButton, setCartButton] = useState(false);
+    const [prodDetail, setProdDetail] = useState({});
 
     const {cart} = useCart()
 
@@ -54,28 +56,14 @@ const ShopScreen = () => {
   return (
 
     <>
-    <ScrollView>
-    {/* <View>
-        <FlatList
-        refreshControl={
-            <RefreshControl 
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            />
-        }
-        data={searchData}
-        renderItem={({item}) => renderBanner(item)}
-        keyExtractor={item => item.id}
-        horizontal={true}
-        />
-    </View> */}
+    
         <View>
             <ShopHeader />        
         </View>
-        <View>
-            <ProductList refreshing={filters}/>   
+        <View style={{height: '90%'}}>
+            <ProductList refreshing={filters} setProdDetail={setProdDetail}/>   
         </View>
-    </ScrollView>
+    
     {cart && Object.keys(cart).length > 0 ? (
     <View>
     <CartButton setCartButton={setCartButton}/>
@@ -83,6 +71,7 @@ const ShopScreen = () => {
     ) : <></>
     }
     <Cart cartButton={cartButton} setCartButton={setCartButton}/>
+    <ProductModal prodDetail={prodDetail} setProdDetail={setProdDetail}/>
     </>
   )
 }

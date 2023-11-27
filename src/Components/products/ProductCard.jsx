@@ -8,12 +8,13 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 
-const ProductCard = ({img, icon, category, tittle, price, description, prod}) => {
+const ProductCard = ({img, icon, category, tittle, price, description, prod, setProdDetail, item}) => {
 
     const [count, setCount] = useState(1);
 
     const { addToCart, cart, clearCart, removeFromCart } = useCart();
 
+    
 
     
     const handleAddToCart = () => {
@@ -46,11 +47,18 @@ const ProductCard = ({img, icon, category, tittle, price, description, prod}) =>
             {category}
         </Text>
         <View style={{flexDirection: 'row', gap: 5, alignItems: 'center', justifyContent: 'space-between'}}>
-            <View style={{flexDirection: 'row', gap: 5, alignItems: 'center'}}>
-            <AntDesign name='minuscircleo' size={24} color={'black'} onPress={() => setCount(count -1)}/>
-            <Text>{count}</Text>
-            <AntDesign name='pluscircleo' size={24} color={'black'} onPress={() => setCount(count +1)}/>
-            </View>
+            <TouchableOpacity style={{
+                flexDirection: 'row', 
+                alignItems: 'center', 
+                backgroundColor: 'black', 
+                borderRadius: 10, 
+                borderColor: 'black', 
+                borderWidth: 1, 
+                padding: 3}}
+                onPress={() => setProdDetail(item)}
+                >      
+            <Text style={{fontSize: 10, color: 'white'}}>Ver más</Text>  
+            </TouchableOpacity>
             <Text>${price * count}</Text>
         </View>
         <Text numberOfLines={2} style={{fontSize: 12, textAlign: 'center'}}>

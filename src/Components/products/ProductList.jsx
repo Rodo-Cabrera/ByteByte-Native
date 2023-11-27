@@ -8,7 +8,7 @@ import ProductCard from './ProductCard';
 import { useFilters } from '../../hooks/useFilters';
 
 
-const ProductList = ({refreshing}) => {
+const ProductList = ({refreshing, setProdDetail}) => {
 
     const {token} = useAuth()
     const [prod, setProd] = useState([]);
@@ -42,8 +42,9 @@ const ProductList = ({refreshing}) => {
     <FlatList 
     data={prodFilter(prod)}
     keyExtractor={(item) => item._id}
+    scrollEnabled
     renderItem={({item}) => (     
-      <ProductCard {...item} prod={item}/>
+      <ProductCard {...item} prod={item} setProdDetail={() => setProdDetail(item)}/>
     )}
     contentContainerStyle={{paddingHorizontal: 15}}
     />

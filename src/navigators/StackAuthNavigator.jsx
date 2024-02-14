@@ -6,6 +6,8 @@ import RegisterScreen from '../Components/auth/RegisterScreen';
 import TabsNavigator from './TabsNavigator';
 import { AuthContext } from '../context/AuthContext';
 import ShopScreen from '../Components/products/ShopScreen';
+import ContactScreen from '../Components/screens/ContactScreen';
+import MainScreen from '../Components/screens/MainScreen';
 const Stack = createStackNavigator();
 
 
@@ -33,10 +35,24 @@ const StackAuthNavigator = () => {
           />
           <Stack.Screen
           options={{
+            title: 'Main',
+          }} 
+          name='Main'
+          component={MainScreen}
+          />
+          <Stack.Screen
+          options={{
             title: 'Shop',
           }} 
           name='Shop'
           component={ShopScreen}
+          />
+          <Stack.Screen
+          options={{
+            title: 'Contact',
+          }} 
+          name='Contact'
+          component={ContactScreen}
           />
       </Stack.Navigator>
     )

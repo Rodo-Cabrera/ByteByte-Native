@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { FlatList, Image, RefreshControl, View} from 'react-native'
-import { searchData } from '../../data/searchData'
 import ProductList from './ProductList';
 import { ScrollView } from 'react-native-gesture-handler';
 import ShopHeader from './filters/ShopHeader';

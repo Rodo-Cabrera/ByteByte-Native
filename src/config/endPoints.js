@@ -6,5 +6,6 @@ export const userEndpoints =
 
 export const productsEndpoints = {
     getAllProd: '/prod/get-products',
-    getProdByCategory : '/prod/get-category-product'
+    getProdByCategory : '/prod/get-category-product',
+    getProdByTittle: '/prod/get-product-by-tittle'
 }

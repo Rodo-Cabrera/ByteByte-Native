@@ -3,23 +3,23 @@ import { View, StyleSheet, Text, FlatList, Image, Dimensions, SafeAreaView, Anim
 import { LinearGradient } from 'expo-linear-gradient';
 const images = [
     {
-      img:'https://picsum.photos/200/300',
-      title: 'Home',
-      to: 'Home'
+      img:'https://media.citizen.co.za/wp-content/uploads/2023/08/gaming-calendar-august-september-2023.png',
+      title: 'Main',
+      to: 'Main'
     },
     {
-        img:'https://picsum.photos/id/237/200/300',
+        img:'https://bpb-eu-w2.wpmucdn.com/blogs.brighton.ac.uk/dist/0/2799/files/2017/02/qmybkmtqtg88gzoyltt1-2m3j2b9.jpg',
         title: 'Productos destacados',
         to: 'Shop'
       },
       {
-        img:'https://picsum.photos/id/238/200/300',
-        title: 'Ingresar',
-        to: 'Auth'
+        img:'https://i.kinja-img.com/image/upload/c_fill,h_900,q_60,w_1600/965f0a5aa66eb82c6521a98da9cd8660.jpg',
+        title: 'Contacto',
+        to: 'Contact'
       },
       {
-        img:'https://picsum.photos/id/239/200/300',
-        title: 'Registrarse',
+        img:'https://res.cloudinary.com/ddduh1zw4/image/upload/v1703280727/z5nt8ljwk7zzvyzxv4qf.png',
+        title: 'Quienes somos?',
         to: 'Some'
       },
 
@@ -31,7 +31,7 @@ const height = Dimensions.get('window').height;
 const CONTAINER_SPACE = width * 0.7;
 const SIDE_SPACE = (width - CONTAINER_SPACE) / 2;
 const SPACE = 10;
-const BACKDROP_HEIGHT = height * 0.5;
+const BACKDROP_HEIGHT = height * 0.9;
 
 const BackDrop = ({scrollX}) => {
 
@@ -141,7 +141,7 @@ const Carousel = ({navigation}) => {
                             marginHorizontal: SPACE,
                             padding: SPACE,
                             borderRadius: 34,
-                            backgroundColor: '#fff',
+                            backgroundColor: 'rgb(255, 204, 0)',
                             alignItems: 'center',
                             transform: [{translateY}]
                         }}>

@@ -40,4 +40,16 @@ export const getOneUser = async (token, id) => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  export const getProdByTittle = async (token, tittle) => {
+    try {
+      return await eShopApiUrl.get(`${productsEndpoints.getProdByTittle}/${tittle}`, {
+        headers: {
+          "access-token": token
+        }
+      })
+    } catch (error) {
+      console.log(error);
+    }
   }

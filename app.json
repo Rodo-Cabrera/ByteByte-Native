@@ -25,6 +25,19 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-updates",
+        {
+          "username": "rodoc"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "7dc3d005-f86b-4158-8170-070cd0e06b91"
+      }
     }
   }
 }

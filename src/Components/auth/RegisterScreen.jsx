@@ -39,11 +39,11 @@ const RegisterScreen = () => {
             name: Yup.string()
             .required('Este campo es obligatorio')
             .max(15, 'Caracteres máximos: 15')
-            .min(4, 'Caracteres mínimos: 4'),
+            .min(2, 'Caracteres mínimos: 2'),
             lastName: Yup.string()
             .required('Este campo es obligatorio')
-            .max(15, 'Caracteres máximos: 15')
-            .min(4, 'Caracteres mínimos: 4'),
+            .max(20, 'Caracteres máximos: 20')
+            .min(2, 'Caracteres mínimos: 2'),
             age: Yup.number()
             .required('Este campo es obligatorio')
             .max(85, 'La edad máxima es de 85 años')

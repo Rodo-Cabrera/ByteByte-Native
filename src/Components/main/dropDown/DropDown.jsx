@@ -43,6 +43,69 @@ function DropDown() {
     }).start()
   }
 
+  const arrowStyle = {
+    transform: [
+      {
+        rotate: animation.interpolate({
+          inputRange: [0, 1],
+          outputRange:['0deg', '90deg'],
+          extrapolate: 'clamp'
+        })
+      }
+    ]
+  };
+
+  const translate = {
+    transform: [
+      {
+        translateX: animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [itemValue ? -40 : 0, -40],
+          extrapolate: 'clamp'
+        })
+      },
+      {
+        translateY: animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [itemValue ? -25 : 0, -25],
+          extrapolate: 'clamp'
+        })
+      },
+      {
+        scale: animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [itemValue ? 0.8 : 1, 0.8],
+          extrapolate: 'clamp'
+        })
+      }
+    ]
+  };
+
+  const listStyle = { 
+        height: animation.interpolate({
+          inputRange: [0, 1],
+          outputRange:[0, 215],
+          extrapolate: 'clamp'
+        }),
+        transform: [
+          {
+            translateY: animation.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, 60],
+              extrapolate: 'clamp'
+            })
+          }
+        ]  
+  };
+
+  const scaleStyle = {
+    transform: [
+      {
+        scale: scale
+      }
+    ]
+  }
+
   useEffect(() => {
     handleAnimated()
   }, [toggle])
@@ -62,17 +125,29 @@ function DropDown() {
   const Item = ({value, label}) => {
     return (
       <TouchableOpacity
-        onPress={() => {}}
+        onPress={() => {
+          setDropDown({
+            itemValue: value,
+            itemLabel: label
+          })
+          setData(filtersData)
+          setToggle(false)
+          setText('')
+        }}
         style={styles.item}
       >
         <View style={styles.titleContainer}>
-        <Text style={{fontSize: 15, fontWeight: '300', color: '#383838'}}>
+        <Text style={{fontSize: 15, fontWeight: '300', color: itemValue === value ? '#383838' : '#adadad'}}>
           {label}
         </Text>
         </View>
-        <View style={styles.checkContainer}>
-          <Material name={'check'} size={18} color={'green'}/>
-        </View>
+        {
+          itemValue === value 
+          &&
+          <View style={styles.checkContainer}>
+            <Material name={'check'} size={18} color={'green'}/>
+          </View>
+        }
       </TouchableOpacity>
     )
   }
@@ -80,26 +155,38 @@ function DropDown() {
   return (
     
       <View style={styles.dropDownContainer}>
-        <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback
+        onPressIn={() => setToggleLong(true)}
+        onPressOut={() => setToggleLong(false)}
+        onPress={() => setToggle(!toggle)}
+        >
             <View style={styles.button}>
               <View style={styles.leftIcon}>
-                <Material name={'folder-outline'} size={18} color={'#2F7EBF'}/>
+                <Material name={toggle ? 'folder-open-outline' :'folder-outline'} size={18} color={'#2F7EBF'}/>
               </View>
 
-              <View style={styles.titleBox}>
-                <Text style={{fontSize: 14, color: '#383838', fontWeight: '300'}}>
+              <Animated.View style={[styles.titleBox, translate]}>
+                <Text style={{fontSize: 14, color: '#383838', fontWeight: '300', color: '#2F7EBF'}}>
                   Seleccionar categoría...
                 </Text>
-              </View>
-
-              <View style={styles.arrowR}>
+              </Animated.View>
+                {
+                  itemValue
+                  &&
+                  <Animated.View style={[styles.titleBox, {zIndex: 0}]}>
+                    <Text style={{fontSize: 14, fontWeight: '300'}}>
+                      {itemLabel}
+                    </Text>
+                  </Animated.View>
+                }
+              <Animated.View style={[styles.arrowR, arrowStyle]}>
                 <Material name={'chevron-right'} size={20} color={'#2F7EBF'}/>
-                <View style={styles.circle}/>
-              </View>
+                <Animated.View style={[styles.circle, scaleStyle]}/>
+              </Animated.View>
             </View>
         </TouchableWithoutFeedback>
 
-        <View style={styles.container}>
+        <Animated.View style={[styles.container, listStyle]}>
           <View style={[styles.listContainer, {opacity: 1}]}>
             <View style={styles.searchBar}>
               <View style={styles.magnify}>
@@ -123,7 +210,7 @@ function DropDown() {
             </View>
 
           </View>
-        </View>
+        </Animated.View>
       </View>
     
   )
@@ -134,7 +221,8 @@ export default DropDown
 const styles = StyleSheet.create({
   dropDownContainer: {
     height: 'auto',
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
+    top: 30
   },
   button: {
     height: 50,
@@ -187,7 +275,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     position: 'absolute',
     left: 0,
-    top: 50,
     borderRadius: 4,
     borderWidth: 1.8,
     borderColor: '#2F7EBF',
